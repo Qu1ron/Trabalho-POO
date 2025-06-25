@@ -54,7 +54,7 @@ class Mago(Personagem):
         for nome, detalhe in skills.items(): 
             if detalhe['Classe'] == 'Mago':
                 self.skills_mago[nome] = detalhe
-    
+
     def ataque(self):
         if self.Mp >=5:
             self.dmg = 15
@@ -159,6 +159,10 @@ def mostrar_guerreiros():
     
     print("\n============================")
     
+
+
+
+
 if __name__ == "__main__":
     print("------------------------------------")
     print("------------------------------------")
