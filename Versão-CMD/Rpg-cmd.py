@@ -82,7 +82,27 @@ class Guerreiro(Personagem):
             self.dmg = 20
         return self.dmg
         
+class Arqueiro(Personagem ) :
+    def __init__ (self ,nameMaxHp = 100 ,Hp = 100 ,MaxMp = 125 ,Mp = 120 ,Defense = 20 ,Speed = 15 ,skills = Ataques) :
+        super().__init__( name ,MaxHp ,Hp ,MaxMp ,Mp ,Defense ,Speed)
+        
+        self.skills_arqueiro = {}
+        for nome ,detalhe in skills.items():
+            if detalhe ['Classe'] == 'Arqueiro' :
+                self.skills_arqueiro[nome] = detalhe
+                    
+    def ataque (self ):
+        if self.Mp >= 12:
+            self.dmg = 22
+            self.Mp -= 12
+        else:
+            print("Perdeu o foco! Um simples arranhão ")
+            self.dmg = 12
+        return self.dmg
 
-    
+
+
+
+
 if __name__ == "__main__":
     pass
