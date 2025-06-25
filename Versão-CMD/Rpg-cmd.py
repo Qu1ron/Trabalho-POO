@@ -23,14 +23,14 @@ class Personagem:
         
         #Funcao pra checar se o Personagem esta vivo
     def survived(self):
-        if Hp <= 0:
+        if self.Hp <= 0:
             return False
         else:
             return True
     
         #funcao pra calcular o dano
     def damage_cal(self,dano):
-        self.Hp = self.Hp - (dano-self.Defense)
+        self.Hp = self.Hp - max(0, dano - self.Defense) #max garante que o dano não seja menor que 0
         
     
         #funcao pro dodge, tem que testar pra ver se a formula funciona bem   
@@ -45,12 +45,135 @@ class Personagem:
             return False
         
         
+class Mago(Personagem):
+    def __init__(self, name, MaxHp = 100, Hp = 100, MaxMp = 150, Mp = 150, Defense = 10, Speed = 10, skills = Ataques):
+        super().__init__(name, MaxHp, Hp, MaxMp, Mp, Defense, Speed)
         
+        #pra cada nome e detalhe no dicionario Ataques, se detalhe = 'Mago' agente copia todos os detalhes da skill com esse nome
+        self.skills_mago = {}
+        for nome, detalhe in skills.items(): 
+            if detalhe['Classe'] == 'Mago':
+                self.skills_mago[nome] = detalhe
+
+    def ataque(self):
+        if self.Mp >=5:
+            self.dmg = 15
+            self.Mp -= 5
+        else:
+            print("Não tem mana suficiente... Cajadada vai servir!")
+            self.dmg = 5
+        return self.dmg
+    
+class Guerreiro(Personagem):
+    def __init__(self, name, MaxHp = 100, Hp = 100, MaxMp = 100, Mp = 100, Defense = 30, Speed = 5, skills = Ataques):
+        super().__init__(name, MaxHp, Hp, MaxMp, Mp, Defense, Speed)
+
+        self.skills_guerreiro = {}
+        for nome, detalhe in skills.items():
+            if detalhe['Classe'] == 'Guerreiro':
+                self.skills_guerreiro[nome] = detalhe
         
+    def ataque(self):
+        if self.Mp >= 20:
+            self.dmg = 30
+            self.Mp -= 20
+        else:
+            print("Lhe falta Vigor!")
+            self.dmg = 20
+        return self.dmg
+        
+class Arqueiro(Personagem ) :
+    def __init__ (self ,name, MaxHp = 100 ,Hp = 100 ,MaxMp = 125 ,Mp = 125 ,Defense = 20 ,Speed = 15 ,skills = Ataques) :
+        super().__init__( name ,MaxHp ,Hp ,MaxMp ,Mp ,Defense ,Speed)
+        
+        self.skills_arqueiro = {}
+        for nome ,detalhe in skills.items():
+            if detalhe ['Classe'] == 'Arqueiro' :
+                self.skills_arqueiro[nome] = detalhe
+                    
+    def ataque (self ):
+        if self.Mp >= 12:
+            self.dmg = 22
+            self.Mp -= 12
+        else:
+            print("Perdeu o foco! Um simples arranhão ")
+            self.dmg = 12
+        return self.dmg
+
+
+# função para definir a classe do jogador
+def escolher_classe(nome_jogador):
+    # Loop para garantir que os usuários escolham suas classes
+    while True:
+        print(f"\n{nome_jogador}, escolha sua classe: ")
+        print("1 - Mago")
+        print("2 - Guerreiro")
+        print("3 - Arqueiro")
+        escolha = int(input("Classe escolhida: "))
+
+        if escolha == 1:
+            nome_personagem = input("Escolha um nome para seu Mago: ")
+            return Mago(nome_personagem)
+        elif escolha == 2:
+            nome_personagem = input("Escolha um nome para seu Guerreiro: ")
+            return Guerreiro(nome_personagem)
+        elif escolha == 3:
+            nome_personagem = input("Escolha um nome para seu Arqueiro: ")
+            return Arqueiro(nome_personagem)
+        else:
+            print("Opção inválida, digite novamente.")
+
+# Função para mostrar os guerreiros e seus respectivos atributos/ataques
+def mostrar_guerreiros():
+    print("\n=== CLASSES: ===\n")
     
+    print("Mago:")
+    print("  - HP: 100")
+    print("  - MP: 150")
+    print("  - Defesa: 10")
+    print("  - Velocidade: 10")
+    print("  - Ataques:")
+    for nome, detalhe in Ataques.items():
+        if detalhe["Classe"] == "Mago":
+            print(f"  • {nome}: Dano {detalhe['Damage']}, MP {detalhe['Mp']}")
     
+    print("\nGuerreiro:")
+    print("  - HP: 100")
+    print("  - MP: 100")
+    print("  - Defesa: 30")
+    print("  - Velocidade: 5")
+    print("  - Ataques:")
+    for nome, detalhe in Ataques.items():
+        if detalhe["Classe"] == "Guerreiro":
+            print(f"  • {nome}: Dano {detalhe['Damage']}, MP {detalhe['Mp']}")
     
+    print("\nArqueiro:")
+    print("  - HP: 100")
+    print("  - MP: 125")
+    print("  - Defesa: 20")
+    print("  - Velocidade: 15")
+    print("  - Ataques:")
+    for nome, detalhe in Ataques.items():
+        if detalhe["Classe"] == "Arqueiro":
+            print(f"  • {nome}: Dano {detalhe['Damage']}, MP {detalhe['Mp']}")
     
+    print("\n============================")
     
+
+
+
+
 if __name__ == "__main__":
-    pass
+    print("------------------------------------")
+    print("------------------------------------")
+    mostrar_guerreiros()
+    print("------------------------------------")
+    print("------------------------------------")
+
+
+    # Variáveis para armaenar as escolhas dos jogadores
+    nome_jogador1 = input("Jogador 1, digite o seu nome: ")
+    jogador1 = escolher_classe(nome_jogador1)
+
+    nome_jogador2 = input("Jogador 2, digite o seu nome: ")
+    jogador2 = escolher_classe(nome_jogador2)
