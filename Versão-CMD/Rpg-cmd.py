@@ -23,14 +23,14 @@ class Personagem:
         
         #Funcao pra checar se o Personagem esta vivo
     def survived(self):
-        if Hp <= 0:
+        if self.Hp <= 0:
             return False
         else:
             return True
     
         #funcao pra calcular o dano
     def damage_cal(self,dano):
-        self.Hp = self.Hp - (dano-self.Defense)
+        self.Hp = self.Hp - max(0, dano - self.Defense) #max garante que o dano não seja menor que 0
         
     
         #funcao pro dodge, tem que testar pra ver se a formula funciona bem   
@@ -45,12 +45,44 @@ class Personagem:
             return False
         
         
+class Mago(Personagem):
+    def __init__(self, name, MaxHp = 100, Hp = 100, MaxMp = 150, Mp = 150, Defense = 10, Speed = 10, skills = Ataques):
+        super().__init__(name, MaxHp, Hp, MaxMp, Mp, Defense, Speed)
         
+        #pra cada nome e detalhe no dicionario Ataques, se detalhe = 'Mago' agente copia todos os detalhes da skill com esse nome
+        self.skills_mago = {}
+        for nome, detalhe in skills.items(): 
+            if detalhe['Classe'] == 'Mago':
+                self.skills_mago[nome] = detalhe
+    
+    def ataque(self):
+        if self.Mp >=5:
+            self.dmg = 15
+            self.Mp -= 5
+        else:
+            print("Não tem mana suficiente... Cajadada vai servir!")
+            self.dmg = 5
+        return self.dmg
+    
+class Guerreiro(Personagem):
+    def __init__(self, name, MaxHp = 100, Hp = 100, MaxMp = 100, Mp = 100, Defense = 30, Speed = 5, skills = Ataques):
+        super().__init__(name, MaxHp, Hp, MaxMp, Mp, Defense, Speed)
+
+        self.skills_guerreiro = {}
+        for nome, detalhe in skills.items():
+            if detalhe['Classe'] == 'Guerreiro':
+                self.skills_guerreiro[nome] = detalhe
         
-    
-    
-    
-    
+    def ataque(self):
+        if self.Mp >= 20:
+            self.dmg = 30
+            self.Mp -= 20
+        else:
+            print("Lhe falta Vigor!")
+            self.dmg = 20
+        return self.dmg
+        
+
     
 if __name__ == "__main__":
     pass
