@@ -54,7 +54,7 @@ class Mago(Personagem):
         for nome, detalhe in skills.items(): 
             if detalhe['Classe'] == 'Mago':
                 self.skills_mago[nome] = detalhe
-
+    
     def ataque(self):
         if self.Mp >=5:
             self.dmg = 15
@@ -159,10 +159,6 @@ def mostrar_guerreiros():
     
     print("\n============================")
     
-
-
-
-
 if __name__ == "__main__":
     print("------------------------------------")
     print("------------------------------------")
@@ -171,9 +167,6 @@ if __name__ == "__main__":
     print("------------------------------------")
 
 
-    # Variáveis para armaenar as escolhas dos jogadores
-    nome_jogador1 = input("Jogador 1, digite o seu nome: ")
-    jogador1 = escolher_classe(nome_jogador1)
-
-    nome_jogador2 = input("Jogador 2, digite o seu nome: ")
-    jogador2 = escolher_classe(nome_jogador2)
+    # Variáveis para armazenar as escolhas dos jogadores
+    jogador1 = escolher_classe("Jogador 1")
+    jogador2 = escolher_classe("Jogador 2")
