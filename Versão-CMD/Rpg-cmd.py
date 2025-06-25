@@ -30,7 +30,7 @@ class Personagem:
     
         #funcao pra calcular o dano
     def damage_cal(self,dano):
-        self.Hp = self.Hp - (dano-self.Defense)
+        self.Hp = self.Hp - max(0, dano - self.Defense) #max garante que o dano não seja menor que 0
         
     
         #funcao pro dodge, tem que testar pra ver se a formula funciona bem   
@@ -45,12 +45,25 @@ class Personagem:
             return False
         
         
+class Mage(Personagem):
+    def __init__(self, name, MaxHp = 100, Hp = 100, MaxMp = 150, Mp = 150, Defense = 10, Speed = 10, skills = Ataques):
+        super().__init__(name, MaxHp, Hp, MaxMp, Mp, Defense, Speed)
         
-        
+        #pra cada nome e detalhe no dicionario Ataques, se detalhe = 'Mago' agente copia todos os detalhes da skill com esse nome
+        self.skills_mago = {}
+        for nome, detalhe in skills.items(): 
+            if detalhe['Classe'] == 'Mago':
+                self.skills_mago[nome] = detalhe
     
-    
-    
-    
+    def ataque(self):
+        if self.Mp >=5:
+            self.dmg = 15
+            self.Mp -= 5
+        else:
+            print("Nao tem mana suficiente... Cajadada vai servir!")
+            self.dmg = 5
+        return self.dmg
+
     
 if __name__ == "__main__":
     pass
