@@ -17,7 +17,7 @@ class Personagem:
     
         #Funcao pro ataque basico
     def ataque(self):
-        self.dmg = 10
+        self.dmg = 12
         return self.dmg
         
         #Funcao pra checar se o Personagem esta vivo
@@ -29,7 +29,7 @@ class Personagem:
     
         #funcao pra calcular o dano
     def damage_cal(self,dano):
-        self.Hp = self.Hp - max(0, dano - (self.Defense / 2)) #max garante que o dano não seja menor que 0
+        self.Hp = self.Hp - max(1, dano - (self.Defense / 2)) #max garante que o dano não seja menor que 0
         
     
         #funcao pro dodge, tem que testar pra ver se a formula funciona bem   
@@ -57,7 +57,7 @@ class Mago(Personagem):
     
     def ataque(self):
         if self.Mp >=5:
-            self.dmg = 15
+            self.dmg = 20
             self.Mp -= 5
         else:
             print("Não tem mana suficiente... Cajadada vai servir!")
