@@ -4,6 +4,25 @@ import numpy as np
 import random
 from Data import *
 
+#Log de batalha
+class log:
+    def __init__(self,arquivo="battle_log.txt" ) :
+        self.terminal = sys.stdout
+        self.log_file = open(arquivo,"w",encoding="utf-8") #utf-8 é a biblioteca em português
+        
+    def write (self,message ) :
+        self.terminal.write(message) #Sem isso não apareceria os print no terminal
+        self.log_file.write(message)
+        
+    def flush(self ) :
+        print(" ")
+        self.terminal.flush()
+        self.log_file.flush()
+
+#Muda a saída do terminal pro arquivo
+sys.stdout = log("battle_log.txt")
+
+
 class Personagem:
         #Funcao para inicializar as variaveis
     def __init__(self, name, MaxHp = 100, Hp = 100, MaxMp = 100, Mp = 100, Defense = 10, Speed = 10):
