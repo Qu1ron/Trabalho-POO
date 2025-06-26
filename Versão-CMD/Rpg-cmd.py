@@ -12,8 +12,7 @@ class log:
         #Para não "perder" a saída do terminal pois ela será modificada, originalmente a saída é configurada para o terminal
         self.log_file = open(arquivo,"w",encoding="utf-8") 
         #Abertura do arquivo para que possa ser escrito
-        #"w", vem de write, se não tinha o arquivo ele cria, se já existir ele apaga se tiver algo escrito
-        #utf-8 é a biblioteca geral e moderna que abrange vários idiomas e caracteres 
+        #utf-8 é a biblioteca geral e moderna que abrange vários caracteres 
         
     def write (self,message ) :
     #"Duplica" o texto para aparecer tanto no terminal quanto no arquivo
@@ -31,8 +30,7 @@ class log:
 
 
 sys.stdout = log("battle_log.txt")
-#Muda a saída do terminal pro arquivo
-#stdout é a saída do código, originalmente é o terminal mas aqui eu mando para o obj
+#stdout é a saída do código, originalmente é o terminal mas aqui eu transformo em um obj da classe Log
 
 
 class Personagem:
