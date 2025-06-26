@@ -8,20 +8,31 @@ from Data import *
 #Log de batalha
 class log:
     def __init__(self,arquivo="battle_log.txt" ) :
-        self.terminal = sys.stdout
-        self.log_file = open(arquivo,"w",encoding="utf-8") #utf-8 é a biblioteca em português
+        self.terminal = sys.stdout 
+        #Para não "perder" a saída do terminal pois ela será modificada, originalmente a saída é configurada para o terminal
+        self.log_file = open(arquivo,"w",encoding="utf-8") 
+        #Abertura do arquivo para que possa ser escrito
+        #"w", vem de write, se não tinha o arquivo ele cria, se já existir ele apaga se tiver algo escrito
+        #utf-8 é a biblioteca geral e moderna que abrange vários idiomas e caracteres 
         
     def write (self,message ) :
-        self.terminal.write(message) #Sem isso não apareceria os print no terminal
-        self.log_file.write(message)
+    #"Duplica" o texto para aparecer tanto no terminal quanto no arquivo
+        self.terminal.write(message) 
+        #Sem isso não apareceria os print no terminal
+        self.log_file.write(message) 
+        #Escreve no arquivo de texto
         
     def flush(self ) :
-        print(" ")
-        self.terminal.flush()
-        self.log_file.flush()
+    #Envio imediato das informações
+        self.terminal.flush() 
+        #Para o terminal
+        self.log_file.flush() 
+        #Para o arquivo
 
-#Muda a saída do terminal pro arquivo
+
 sys.stdout = log("battle_log.txt")
+#Muda a saída do terminal pro arquivo
+#stdout é a saída do código, originalmente é o terminal mas aqui eu mando para o obj
 
 
 class Personagem:
