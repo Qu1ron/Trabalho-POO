@@ -4,6 +4,7 @@ import numpy as np
 import random
 from Data import *
 
+
 #Log de batalha
 class log:
     def __init__(self,arquivo="battle_log.txt" ) :
