@@ -8,8 +8,8 @@ def imprimir_arte(arte_p1,arte_p2):
     linhas_p1 = arte_p1.strip().splitlines() #divide as artes em uma lista de linhas
     linhas_p2 = arte_p2.strip().splitlines()
 
-    for x in range(len(linhas_p1)):
-        print(linhas_p1[x]+ " " + linhas_p2[x])
+    for x in range(len(linhas_p1)): #intera x no range da quantidade de linhas
+        print(linhas_p1[x]+ " " + linhas_p2[x]) #imprime as duas artes linha a linha
 
 
 # Funcao pra limpar o terminal
@@ -167,7 +167,7 @@ class Batalha:
         if (self.choice_atk == 1 or self.choice_atk == 2) and (self.choice_defe == 1 or self.choice_defe == 2):
             print(f"{self.atacante.name} Atacou {self.nome_skill_atacante}!\n")
             sleep(1.5)
-            print(f"{self.defensor.name} tomou {max(0,self.dmg_atacante-self.defensor.Defense)} de dano!\n")
+            print(f"{self.defensor.name} tomou {max(1,self.dmg_atacante-self.defensor.Defense/2)} de dano!\n")
             sleep(1.5)
             self.defensor.damage_cal(self.dmg_atacante)
             if not self.defensor.survived():
@@ -175,7 +175,7 @@ class Batalha:
             else:
                 print(f"{self.defensor.name} Atacou {self.nome_skill_defe}!\n")
                 sleep(1.5)
-                print(f"{self.atacante.name} tomou {max(0,self.dmg_defe-self.atacante.Defense)} de dano!\n")
+                print(f"{self.atacante.name} tomou {max(1,self.dmg_defe-self.atacante.Defense/2)} de dano!\n")
                 sleep(1.5)
                 self.atacante.damage_cal(self.dmg_defe)
 
@@ -190,7 +190,7 @@ class Batalha:
             else:
                 print("Esquiva falhou...\n")
                 sleep(1.5)
-                print(f"{self.atacante.name} tomou {max(0,self.dmg_defe-self.atacante.Defense)} de dano!\n")
+                print(f"{self.atacante.name} tomou {max(1,self.dmg_defe-self.atacante.Defense/2)} de dano!\n")
                 sleep(1.5)
                 self.atacante.damage_cal(self.dmg_defe)
         
@@ -204,7 +204,7 @@ class Batalha:
                 sleep(1.5)
             else:
                 print("Esquiva falhou...\n")
-                print(f"{self.defensor.name} tomou {max(0,self.dmg_atacante-self.defensor.Defense)} de dano!\n")
+                print(f"{self.defensor.name} tomou {max(1,self.dmg_atacante-self.defensor.Defense/2)} de dano!\n")
                 sleep(1.5)
                 self.defensor.damage_cal(self.dmg_atacante)
 
@@ -213,10 +213,25 @@ class Batalha:
             sleep(1.5)
         
         self.turno += 1
-        if self.defensor.Mp <= self.defensor.MaxMp-10:
-            self.defensor.Mp += 10
-        if self.atacante.Mp <= self.atacante.MaxMp-10:
-            self.atacante.Mp += 10
+        
+        print("\nRecuperando mana...")
+
+        # Recuperação para o Atacante
+        if isinstance(self.atacante, Mago) and self.atacante.Mp <= self.atacante.MaxMp - 20:
+            self.atacante.Mp += 20
+        elif isinstance(self.atacante, Arqueiro) and self.atacante.Mp <= self.atacante.MaxMp - 12:
+            self.atacante.Mp += 12
+        elif isinstance(self.atacante, Guerreiro) and self.atacante.Mp <= self.atacante.MaxMp - 5:
+            self.atacante.Mp += 5
+        
+        # Recuperação para o Defensor
+        if isinstance(self.defensor, Mago) and self.defensor.Mp <= self.defensor.MaxMp - 20:
+            self.defensor.Mp += 20
+        elif isinstance(self.defensor, Arqueiro) and self.defensor.Mp <= self.defensor.MaxMp - 12:
+            self.defensor.Mp += 12
+        elif isinstance(self.defensor, Guerreiro) and self.defensor.Mp <= self.defensor.MaxMp - 5:
+            self.defensor.Mp += 5
+
             sleep(2)
 
     
