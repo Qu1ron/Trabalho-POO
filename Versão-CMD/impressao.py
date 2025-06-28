@@ -1,5 +1,4 @@
 import sys
-
 # Nesse arquivos temos a classe que irá imprimir as batalhas no arquivo battle_log.txt
 
 #Log de batalha
@@ -24,7 +23,19 @@ class log:
         #Para o terminal
         self.log_file.flush() 
         #Para o arquivo
+    
+    def entrada (self ,texto) :
+    #Função que substitui o input() para log_obj.entrada
+    #Para poder armazenar a resposta do usuário no arquivo de texto
+        texto_usuário = input(texto)
+        self.log_file.write(texto_usuario + " \n" )
+        self.log_file.flush()
+    
+    def fechar(self) :
+    #Função para fechar o arquivo de texto e restabelecer a saída do programa novamente para o terminal
+    self.log_file.close()
+    sys.stdout = self.terminal
 
-
-sys.stdout = log("battle_log.txt")
+log_obj = log("battle_log.txt")
+sys.stdout = log_obj
 #stdout é a saída do código, originalmente é o terminal mas aqui eu transformo em um obj da classe Log
