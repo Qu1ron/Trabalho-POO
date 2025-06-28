@@ -97,7 +97,7 @@ class Batalha:
 
         while self.choice_atk not in [1, 2, 3]:
 
-            self.choice_atk = int(input("-> "))
+            self.choice_atk = int(log_objt.entrada("-> "))
             
 
             match self.choice_atk:
