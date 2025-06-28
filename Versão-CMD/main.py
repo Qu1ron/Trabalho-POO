@@ -1,7 +1,7 @@
 from Data import *
 from classes import *
 from batalha import *
-from impressao import *
+import impressao
 
 # função para definir a classe do jogador
 def escolher_classe(nome_jogador):
