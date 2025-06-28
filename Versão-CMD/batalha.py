@@ -1,7 +1,7 @@
 from classes import Mago, Guerreiro, Arqueiro
 import os
 from time import sleep
-
+from impressao import *
 # Nesse arquivo temos a lógica da batalha
 
 def imprimir_arte(arte_p1,arte_p2):
@@ -58,7 +58,7 @@ class Batalha:
         
         # Aqui temos um loop para garantir que o jogador escolha um ataque válido conforme sua Mana
         while True:
-            escolha = int(input("Ataque escolhido: "))
+            escolha = int(log_obj.entrada("Ataque escolhido: "))
             # Crio uma lista com as chaves de skill que são os nomes e armazeno conforme a escolha do ataque
             skill_nome = list(skills.keys())[escolha - 1]
             # Armazenando a skill escolhida
