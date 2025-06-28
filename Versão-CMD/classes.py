@@ -105,4 +105,4 @@ class Arqueiro(Personagem ) :
         else:
             print("Perdeu o foco! Um simples arranhão ")
             self.dmg = super().ataque()
-        return self.dmg
+        return int(self.dmg)
