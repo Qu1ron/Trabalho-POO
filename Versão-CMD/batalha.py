@@ -1,7 +1,7 @@
 from classes import Mago, Guerreiro, Arqueiro
 import os
 from time import sleep
-from impressao import *
+import impressao
 # Nesse arquivo temos a lógica da batalha
 
 def imprimir_arte(arte_p1,arte_p2):
