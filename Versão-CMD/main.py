@@ -11,7 +11,7 @@ def escolher_classe(nome_jogador):
         print("1 - Mago")
         print("2 - Guerreiro")
         print("3 - Arqueiro")
-        escolha = int(input("Classe escolhida: "))
+        escolha = int(log_obj.entrada("Classe escolhida: "))
 
         if escolha == 1:
             nome_personagem = input("Escolha um nome para seu Mago: ")
@@ -78,3 +78,5 @@ if __name__ == "__main__":
     # Batalha iniciada
     batalha1 = Batalha(jogador1, jogador2)
     batalha1.iniciar()
+    log_obj.fechar()
+    #fechando o arquivo no final do código e restaurando a saída do programa para o terminal novamente
