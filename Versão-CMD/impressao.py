@@ -18,13 +18,27 @@ class log:
         self.log_file.write(message) 
         #Escreve no arquivo de texto
         
-    def flush(self ) :
+    def flush (self ) :
     #Envio imediato das informações
         self.terminal.flush() 
         #Para o terminal
         self.log_file.flush() 
         #Para o arquivo
+    
+    def entrada (self,texto) :
+    #Função para "substituir" o input para poder armazenar no arquivo de texto
+        texto_usuario = input(texto)
+        self.log_file.write(texto_usuario +"\n")
+        self.log_file.flush()
+        return texto_usuario
 
+    def fechar (self):
+    #Para fechar o arquivo prevenindo arquivos corrompidos e informações incompletas
+        self.log_file.close()
+        sys.stdout = self.terminal
+        #Restaurando a saído do programa para o terminal novamente
 
-sys.stdout = log("battle_log.txt")
+log_obj = log("battle_log.txt")
+
+sys.stdout = log_obj
 #stdout é a saída do código, originalmente é o terminal mas aqui eu transformo em um obj da classe Log

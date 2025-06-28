@@ -1,7 +1,7 @@
 from Data import *
 from classes import *
 from batalha import *
-from impressao import *
+from impressao import log, log_obj
 
 # função para definir a classe do jogador
 def escolher_classe(nome_jogador):
@@ -11,16 +11,16 @@ def escolher_classe(nome_jogador):
         print("1 - Mago")
         print("2 - Guerreiro")
         print("3 - Arqueiro")
-        escolha = int(input("Classe escolhida: "))
+        escolha = int(log_obj.entrada("Classe escolhida: "))
 
         if escolha == 1:
-            nome_personagem = input("Escolha um nome para seu Mago: ")
+            nome_personagem = log_obj.entrada("Escolha um nome para seu Mago: ")
             return Mago(nome_personagem)
         elif escolha == 2:
-            nome_personagem = input("Escolha um nome para seu Guerreiro: ")
+            nome_personagem = log_obj.entrada("Escolha um nome para seu Guerreiro: ")
             return Guerreiro(nome_personagem)
         elif escolha == 3:
-            nome_personagem = input("Escolha um nome para seu Arqueiro: ")
+            nome_personagem = log_obj.entrada("Escolha um nome para seu Arqueiro: ")
             return Arqueiro(nome_personagem)
         else:
             print("Opção inválida, digite novamente.")
@@ -78,3 +78,6 @@ if __name__ == "__main__":
     # Batalha iniciada
     batalha1 = Batalha(jogador1, jogador2)
     batalha1.iniciar()
+
+    log_obj.fechar()
+    #fechando o arquivo e restaurando saída do programa
