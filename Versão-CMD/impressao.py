@@ -33,8 +33,8 @@ class log:
     
     def fechar(self) :
     #Função para fechar o arquivo de texto e restabelecer a saída do programa novamente para o terminal
-    self.log_file.close()
-    sys.stdout = self.terminal
+        self.log_file.close()
+        sys.stdout = self.terminal
 
 log_obj = log("battle_log.txt")
 sys.stdout = log_obj
